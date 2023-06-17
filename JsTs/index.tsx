@@ -11,7 +11,7 @@
 
 
 
-export const minMaxLog = (numbers: number[], step:number|undefined) => {
+export const minMaxLog = (numbers: number[], step?:number|undefined) => {
     /*
         This function returns an object list of 3 things:
         1. Min value in the list
@@ -50,7 +50,7 @@ export const minMaxLog = (numbers: number[], step:number|undefined) => {
 
 
 export const getStorageIndex = (number: number,min:number,step: number, ) => {
-    return (number - min) / step;
+    return Math.floor((number - min) / step);
 };
 
 const getValueFromStorageIndex = (index: number,min:number,step: number, ) => {

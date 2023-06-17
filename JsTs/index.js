@@ -44,7 +44,7 @@ var minMaxLog = function (numbers, step) {
 };
 exports.minMaxLog = minMaxLog;
 var getStorageIndex = function (number, min, step) {
-    return (number - min) / step;
+    return Math.floor((number - min) / step);
 };
 exports.getStorageIndex = getStorageIndex;
 var getValueFromStorageIndex = function (index, min, step) {
