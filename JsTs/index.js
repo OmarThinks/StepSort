@@ -30,7 +30,7 @@ var minMaxLog = function (numbers, step) {
             if (number === 0) {
                 continue;
             }
-            currentLog = Math.log(number) / Math.log(10);
+            currentLog = Math.log(Math.abs(number)) / Math.log(10);
             if (currentLog < minLog) {
                 minLog = currentLog;
             }
