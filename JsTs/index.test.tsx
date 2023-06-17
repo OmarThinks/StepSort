@@ -55,12 +55,14 @@ describe('getStorageIndex', () => {
 
 describe('getValueFromStorageIndex', () => {
   test('Normal', () => {
-    expect(getValueFromStorageIndex(0, 0, 1)).toStrictEqual(0); // Normal
-    expect(getValueFromStorageIndex(5, 0, 1)).toStrictEqual(5); // Positive
-    expect(getValueFromStorageIndex(5, 1, 1)).toStrictEqual(6); // Positive with start
-    expect(getValueFromStorageIndex(5, -10, 1)).toStrictEqual(-5); // negative
-    expect(getValueFromStorageIndex(4, 5, 0.1)).toStrictEqual(5.4); // decimal step
-    expect(getValueFromStorageIndex(5, .1, 1)).toStrictEqual(5.1); // decimal start
+    expect(getValueFromStorageIndex(0, 0, 1)).toBeCloseTo(0); // Normal
+    expect(getValueFromStorageIndex(5, 0, 1)).toBeCloseTo(5); // Positive
+    expect(getValueFromStorageIndex(5, 1, 1)).toBeCloseTo(6); // Positive with start
+    expect(getValueFromStorageIndex(5, -10, 1)).toBeCloseTo(-5); // negative
+    expect(getValueFromStorageIndex(4, 5, 0.1)).toBeCloseTo(5.4); // decimal step
+    expect(getValueFromStorageIndex(5, .1, 1)).toBeCloseTo(5.1); // decimal start
+    expect(!0).toBe(true); // decimal start
+    expect(!undefined).toBe(true); // decimal start
   });
 })
 

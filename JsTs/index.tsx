@@ -57,18 +57,60 @@ export const getValueFromStorageIndex = (index: number,min:number,step: number, 
     return index * step + min;
 }
 
-const stepSort = (numbers: number[], _step: number| undefined) => {
 
-    if(typeof(_step)!=="undefined"){
-        if(_step<=0){
+
+export const getStepArray = (numbers: number[], step?: number| undefined) => {
+    if(typeof(step)!=="undefined"){
+        if(step<=0){
             throw new Error("Step cannot be less than or equal to zero")
         }
     }
 
 
     
-    const {minValue,maxValue,minLog} = minMaxLog(numbers, _step)
-    const step = Math.pow(10,minLog) + 1
+    const {minValue,maxValue,minLog} = minMaxLog(numbers, step)
+
+    if(!step) {step = Math.pow(10,minLog)}
+
+
+
+    console.log(maxValue, minValue, step )
+    console.log((maxValue - minValue+1)/step)
+
+    const sortedIndexes: number[] = new Array((maxValue - minValue+1)/step);
+
+    for (let number of numbers) {
+        let storageIndex = getStorageIndex(number,minValue,step)
+        if(!sortedIndexes[storageIndex]){
+            sortedIndexes[storageIndex] = 1
+        }
+        else{
+            sortedIndexes[getStorageIndex(number,minValue,step)]+=1
+        }
+    }
+    
+    console.log(sortedIndexes)
+    return sortedIndexes
+}
+
+
+
+getStepArray([1,2,3,4,20, 1, 1, 1])
+
+const stepSort = (numbers: number[], step?: number| undefined) => {
+
+    if(typeof(step)!=="undefined"){
+        if(step<=0){
+            throw new Error("Step cannot be less than or equal to zero")
+        }
+    }
+
+
+    
+    const {minValue,maxValue,minLog} = minMaxLog(numbers, step)
+
+    if(!step) {step = Math.pow(10,minLog) + 1}
+
 
     const sortedIndexes: number[] = new Array(1+(maxValue - minValue)/step);
 

@@ -6,7 +6,7 @@
     n: number of elemnts in list
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getValueFromStorageIndex = exports.getStorageIndex = exports.minMaxLog = void 0;
+exports.getStepArray = exports.getValueFromStorageIndex = exports.getStorageIndex = exports.minMaxLog = void 0;
 var minMaxLog = function (numbers, step) {
     /*
         This function returns an object list of 3 things:
@@ -51,17 +51,47 @@ var getValueFromStorageIndex = function (index, min, step) {
     return index * step + min;
 };
 exports.getValueFromStorageIndex = getValueFromStorageIndex;
-var stepSort = function (numbers, _step) {
-    if (typeof (_step) !== "undefined") {
-        if (_step <= 0) {
+var getStepArray = function (numbers, step) {
+    if (typeof (step) !== "undefined") {
+        if (step <= 0) {
             throw new Error("Step cannot be less than or equal to zero");
         }
     }
-    var _a = (0, exports.minMaxLog)(numbers, _step), minValue = _a.minValue, maxValue = _a.maxValue, minLog = _a.minLog;
-    var step = Math.pow(10, minLog) + 1;
-    var sortedIndexes = new Array(1 + (maxValue - minValue) / step);
+    var _a = (0, exports.minMaxLog)(numbers, step), minValue = _a.minValue, maxValue = _a.maxValue, minLog = _a.minLog;
+    if (!step) {
+        step = Math.pow(10, minLog);
+    }
+    console.log(maxValue, minValue, step);
+    console.log((maxValue - minValue + 1) / step);
+    var sortedIndexes = new Array((maxValue - minValue + 1) / step);
     for (var _i = 0, numbers_2 = numbers; _i < numbers_2.length; _i++) {
         var number = numbers_2[_i];
+        var storageIndex = (0, exports.getStorageIndex)(number, minValue, step);
+        if (!sortedIndexes[storageIndex]) {
+            sortedIndexes[storageIndex] = 1;
+        }
+        else {
+            sortedIndexes[(0, exports.getStorageIndex)(number, minValue, step)] += 1;
+        }
+    }
+    console.log(sortedIndexes);
+    return sortedIndexes;
+};
+exports.getStepArray = getStepArray;
+(0, exports.getStepArray)([1, 2, 3, 4, 20, 1, 1, 1]);
+var stepSort = function (numbers, step) {
+    if (typeof (step) !== "undefined") {
+        if (step <= 0) {
+            throw new Error("Step cannot be less than or equal to zero");
+        }
+    }
+    var _a = (0, exports.minMaxLog)(numbers, step), minValue = _a.minValue, maxValue = _a.maxValue, minLog = _a.minLog;
+    if (!step) {
+        step = Math.pow(10, minLog) + 1;
+    }
+    var sortedIndexes = new Array(1 + (maxValue - minValue) / step);
+    for (var _i = 0, numbers_3 = numbers; _i < numbers_3.length; _i++) {
+        var number = numbers_3[_i];
         var storageIndex = (0, exports.getStorageIndex)(number, minValue, step);
         if (!sortedIndexes[storageIndex]) {
             sortedIndexes[storageIndex] = 1;
