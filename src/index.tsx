@@ -8,9 +8,6 @@
 
 
 
-function getBaseLog(x:number, y:number) {
-    return Math.log(y) / Math.log(x);
-  }
 
 
 
@@ -48,11 +45,10 @@ const minMaxLog = (numbers: number[]) => {
 
 
 
-const a :number[]= [1,2,3,4,5,6,7,8,9,1,2,11,33,330,7000] ;
+const a :number[]= [1,1,1,2];
 
 console.log(minMaxLog(a))
 
-// step = minLog^10 + 1
 
 const getStorageIndex = (number: number,min:number,step: number, ) => {
     return (number - min) / step;
@@ -65,4 +61,26 @@ const getValueFromStorageIndex = (index: number,min:number,step: number, ) => {
 
 
 
-const decimalSort(sumbers: number[]) => {}
+const decimalSort = (numbers: number[]) => {
+    const {minValue,maxValue,minLog} = minMaxLog(numbers)
+    const step = Math.pow(10,minLog) + 1
+
+    const sortedIndexes: number[] = new Array(1+(maxValue - minValue)/step);
+
+    for (let number of numbers) {
+        let storageIndex = getStorageIndex(number,minValue,step)
+        if(!sortedIndexes[storageIndex]){
+            sortedIndexes[storageIndex] = 1
+        }
+        else{
+            sortedIndexes[getStorageIndex(number,minValue,step)]+=1
+        }
+    }
+
+
+    console.log(sortedIndexes)
+}
+
+
+
+decimalSort(a)

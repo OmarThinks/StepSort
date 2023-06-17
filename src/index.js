@@ -4,10 +4,7 @@
     Best case: O(n)
     n: number of elemnts in list
 */
-function getBaseLog(x, y) {
-    return Math.log(y) / Math.log(x);
-}
-var min_max_log = function (list_of_numbers) {
+var minMaxLog = function (numbers) {
     /*
         This function returns an object list of 3 things:
         1. Min value in the list
@@ -18,8 +15,8 @@ var min_max_log = function (list_of_numbers) {
     var maxValue = -Infinity;
     var minLog = Infinity;
     var currentLog;
-    for (var _i = 0, list_of_numbers_1 = list_of_numbers; _i < list_of_numbers_1.length; _i++) {
-        var number = list_of_numbers_1[_i];
+    for (var _i = 0, numbers_1 = numbers; _i < numbers_1.length; _i++) {
+        var number = numbers_1[_i];
         if (number < minValue) {
             minValue = number;
         }
@@ -34,5 +31,28 @@ var min_max_log = function (list_of_numbers) {
     minLog = Math.floor(minLog);
     return { minValue: minValue, maxValue: maxValue, minLog: minLog };
 };
-var a = [1, 2, 3, 4, 5, 6, 7, 8, 9, , 1, 2, 11, 33, 330, 7000];
-console.log(min_max_log(a));
+var a = [1, 1, 1, 2];
+console.log(minMaxLog(a));
+var getStorageIndex = function (number, min, step) {
+    return (number - min) / step;
+};
+var getValueFromStorageIndex = function (index, min, step) {
+    return index * step + min;
+};
+var decimalSort = function (numbers) {
+    var _a = minMaxLog(numbers), minValue = _a.minValue, maxValue = _a.maxValue, minLog = _a.minLog;
+    var step = Math.pow(10, minLog) + 1;
+    var sortedIndexes = new Array(1 + (maxValue - minValue) / step);
+    for (var _i = 0, numbers_2 = numbers; _i < numbers_2.length; _i++) {
+        var number = numbers_2[_i];
+        var storageIndex = getStorageIndex(number, minValue, step);
+        if (!sortedIndexes[storageIndex]) {
+            sortedIndexes[storageIndex] = 1;
+        }
+        else {
+            sortedIndexes[getStorageIndex(number, minValue, step)] += 1;
+        }
+    }
+    console.log(sortedIndexes);
+};
+decimalSort(a);
