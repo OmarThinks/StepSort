@@ -60,27 +60,58 @@ export const getValueFromStorageIndex = (index: number,min:number,step: number, 
 
 
 export const getStepArray = (numbers: number[], step?: number| undefined) => {
+    console.log(1)
     if(typeof(step)!=="undefined"){
         if(step<=0){
             throw new Error("Step cannot be less than or equal to zero")
         }
     }
+    console.log(2)
 
 
     
     const {minValue,maxValue,minLog} = minMaxLog(numbers, step)
-
-    if(!step) {step = Math.pow(10,minLog)}
-
+    if(minValue === Infinity) {return []} // the list is empty
 
 
+    console.log(3)
+
+
+    if(!step) {step = Math.pow(10,minLog)} 
+    // if step is not defined, then we set it to the 10^minLog
+    console.log(4)
+
+
+    console.log(minLog, "minLog")
     console.log(maxValue, minValue, step )
-    console.log((maxValue - minValue+1)/step)
+    console.log("Array length: ", 1+(maxValue - minValue)/step)
+
 
     const sortedIndexes: number[] = new Array((maxValue - minValue+1)/step);
 
+
+    for(let i = 0; i < numbers.length; i++){
+        //sortedIndexes[i] = 0
+        
+        let number = numbers[i]
+
+        let storageIndex = getStorageIndex(number,minValue,step)
+
+        if(!sortedIndexes[storageIndex]){
+            sortedIndexes[storageIndex] = 1
+        }
+        else{
+            sortedIndexes[getStorageIndex(number,minValue,step)]+=1
+        }
+
+        console.log(sortedIndexes)
+
+    }
+
+    /*
     for (let number of numbers) {
         let storageIndex = getStorageIndex(number,minValue,step)
+
         if(!sortedIndexes[storageIndex]){
             sortedIndexes[storageIndex] = 1
         }
@@ -88,14 +119,16 @@ export const getStepArray = (numbers: number[], step?: number| undefined) => {
             sortedIndexes[getStorageIndex(number,minValue,step)]+=1
         }
     }
+    */
     
-    console.log(sortedIndexes)
+    //console.log(sortedIndexes)
     return sortedIndexes
 }
 
 
 
-getStepArray([1,2,3,4,20, 1, 1, 1])
+
+// getStepArray([1,2,3,4,20, 1, 1, 1])
 
 const stepSort = (numbers: number[], step?: number| undefined) => {
 
@@ -110,6 +143,8 @@ const stepSort = (numbers: number[], step?: number| undefined) => {
     const {minValue,maxValue,minLog} = minMaxLog(numbers, step)
 
     if(!step) {step = Math.pow(10,minLog) + 1}
+
+
 
 
     const sortedIndexes: number[] = new Array(1+(maxValue - minValue)/step);
