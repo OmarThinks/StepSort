@@ -20,7 +20,7 @@ export const minMaxLog = (numbers: number[], step:number|undefined) => {
     */
     let minValue = Infinity
     let maxValue = -Infinity
-    let minLog: number | undefined = Infinity
+    let minLog: number = Infinity
     let currentLog= undefined;
 
     for (let number of numbers) {
@@ -40,9 +40,10 @@ export const minMaxLog = (numbers: number[], step:number|undefined) => {
         }
     }
 
-    if(!step){
-        minLog = Math.floor(minLog)
-    }
+    
+    if(minLog === Infinity) {minLog = 0}
+    minLog = Math.floor(minLog)
+    
 
     return { minValue, maxValue, minLog}
 }

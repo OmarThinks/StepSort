@@ -36,9 +36,10 @@ var minMaxLog = function (numbers, step) {
             }
         }
     }
-    if (!step) {
-        minLog = Math.floor(minLog);
+    if (minLog === Infinity) {
+        minLog = 0;
     }
+    minLog = Math.floor(minLog);
     return { minValue: minValue, maxValue: maxValue, minLog: minLog };
 };
 exports.minMaxLog = minMaxLog;
