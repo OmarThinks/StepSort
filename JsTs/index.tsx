@@ -11,7 +11,7 @@
 
 
 
-export const minMaxLog = (numbers: number[]) => {
+export const minMaxLog = (numbers: number[], step:number|undefined) => {
     /*
         This function returns an object list of 3 things:
         1. Min value in the list
@@ -20,8 +20,8 @@ export const minMaxLog = (numbers: number[]) => {
     */
     let minValue = Infinity
     let maxValue = -Infinity
-    let minLog = Infinity
-    let currentLog;
+    let minLog: number | undefined = Infinity
+    let currentLog= undefined;
 
     for (let number of numbers) {
         if (number < minValue) {
@@ -30,24 +30,22 @@ export const minMaxLog = (numbers: number[]) => {
         if (number > maxValue) {
             maxValue = number
         }
-        currentLog = Math.log(number)/Math.log(10)
-        if (currentLog < minLog) {
-            minLog = currentLog
+        
+        if(!step){
+            if(number === 0 ) {continue}
+            currentLog = Math.log(number)/Math.log(10)
+            if (currentLog < minLog) {
+                minLog = currentLog
+            }
         }
     }
 
-    minLog = Math.floor(minLog)
+    if(!step){
+        minLog = Math.floor(minLog)
+    }
 
     return { minValue, maxValue, minLog}
 }
-
-
-
-
-
-const a :number[]= [1,1,1,2];
-
-console.log(minMaxLog(a))
 
 
 export const getStorageIndex = (number: number,min:number,step: number, ) => {
@@ -58,11 +56,9 @@ const getValueFromStorageIndex = (index: number,min:number,step: number, ) => {
     return index * step + min;
 }
 
-
-
-
-const stepSort = (numbers: number[]) => {
-    const {minValue,maxValue,minLog} = minMaxLog(numbers)
+const stepSort = (numbers: number[], _step: number| undefined) => {
+    
+    const {minValue,maxValue,minLog} = minMaxLog(numbers, _step)
     const step = Math.pow(10,minLog) + 1
 
     const sortedIndexes: number[] = new Array(1+(maxValue - minValue)/step);
@@ -76,16 +72,9 @@ const stepSort = (numbers: number[]) => {
             sortedIndexes[getStorageIndex(number,minValue,step)]+=1
         }
     }
-
-
+    
     console.log(sortedIndexes)
+    
 }
 
-
-
-stepSort(a)
-
-
-
-
-export default stepSort;
+//export default stepSort;
