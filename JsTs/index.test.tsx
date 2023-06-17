@@ -1,5 +1,5 @@
 //import { minMaxLog } from ".";
-const { minMaxLog, getStorageIndex } = require('.');
+const { minMaxLog, getStorageIndex, getValueFromStorageIndex } = require('.');
 
 
 describe('minMaxLog', () => {
@@ -52,6 +52,17 @@ describe('getStorageIndex', () => {
 })
 
 
+
+describe('getValueFromStorageIndex', () => {
+  test('Normal', () => {
+    expect(getValueFromStorageIndex(0, 0, 1)).toStrictEqual(0); // Normal
+    expect(getValueFromStorageIndex(5, 0, 1)).toStrictEqual(5); // Positive
+    expect(getValueFromStorageIndex(5, 1, 1)).toStrictEqual(6); // Positive with start
+    expect(getValueFromStorageIndex(5, -10, 1)).toStrictEqual(-5); // negative
+    expect(getValueFromStorageIndex(4, 5, 0.1)).toStrictEqual(5.4); // decimal step
+    expect(getValueFromStorageIndex(5, .1, 1)).toStrictEqual(5.1); // decimal start
+  });
+})
 
 
 

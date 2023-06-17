@@ -6,7 +6,7 @@
     n: number of elemnts in list
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getStorageIndex = exports.minMaxLog = void 0;
+exports.getValueFromStorageIndex = exports.getStorageIndex = exports.minMaxLog = void 0;
 var minMaxLog = function (numbers, step) {
     /*
         This function returns an object list of 3 things:
@@ -50,7 +50,13 @@ exports.getStorageIndex = getStorageIndex;
 var getValueFromStorageIndex = function (index, min, step) {
     return index * step + min;
 };
+exports.getValueFromStorageIndex = getValueFromStorageIndex;
 var stepSort = function (numbers, _step) {
+    if (typeof (_step) !== "undefined") {
+        if (_step <= 0) {
+            throw new Error("Step cannot be less than or equal to zero");
+        }
+    }
     var _a = (0, exports.minMaxLog)(numbers, _step), minValue = _a.minValue, maxValue = _a.maxValue, minLog = _a.minLog;
     var step = Math.pow(10, minLog) + 1;
     var sortedIndexes = new Array(1 + (maxValue - minValue) / step);
