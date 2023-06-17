@@ -1,2 +1,3 @@
-# DecimalSort
+# Step Sort
+
 Efficient sorting algorithm

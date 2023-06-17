@@ -11,7 +11,7 @@
 
 
 
-const minMaxLog = (numbers: number[]) => {
+export const minMaxLog = (numbers: number[]) => {
     /*
         This function returns an object list of 3 things:
         1. Min value in the list
@@ -50,7 +50,7 @@ const a :number[]= [1,1,1,2];
 console.log(minMaxLog(a))
 
 
-const getStorageIndex = (number: number,min:number,step: number, ) => {
+export const getStorageIndex = (number: number,min:number,step: number, ) => {
     return (number - min) / step;
 };
 
@@ -61,7 +61,7 @@ const getValueFromStorageIndex = (index: number,min:number,step: number, ) => {
 
 
 
-const decimalSort = (numbers: number[]) => {
+const stepSort = (numbers: number[]) => {
     const {minValue,maxValue,minLog} = minMaxLog(numbers)
     const step = Math.pow(10,minLog) + 1
 
@@ -83,4 +83,9 @@ const decimalSort = (numbers: number[]) => {
 
 
 
-decimalSort(a)
+stepSort(a)
+
+
+
+
+export default stepSort;
