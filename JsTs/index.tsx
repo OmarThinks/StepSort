@@ -53,11 +53,19 @@ export const getStorageIndex = (number: number,min:number,step: number, ) => {
     return Math.floor((number - min) / step);
 };
 
-const getValueFromStorageIndex = (index: number,min:number,step: number, ) => {
+export const getValueFromStorageIndex = (index: number,min:number,step: number, ) => {
     return index * step + min;
 }
 
 const stepSort = (numbers: number[], _step: number| undefined) => {
+
+    if(typeof(_step)!=="undefined"){
+        if(_step<=0){
+            throw new Error("Step cannot be less than or equal to zero")
+        }
+    }
+
+
     
     const {minValue,maxValue,minLog} = minMaxLog(numbers, _step)
     const step = Math.pow(10,minLog) + 1

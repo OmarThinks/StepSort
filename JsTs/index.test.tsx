@@ -41,7 +41,6 @@ describe('minMaxLog', () => {
 
 
 describe('getStorageIndex', () => {
-
   test('Normal', () => {
     expect(getStorageIndex(0, 0, 1)).toStrictEqual(0); // Normal
     expect(getStorageIndex(5, 0, 1)).toStrictEqual(5); // Positive
@@ -49,7 +48,12 @@ describe('getStorageIndex', () => {
     expect(getStorageIndex(-5, -10, 1)).toStrictEqual(5); // negative
     expect(getStorageIndex(1, 0, 0.1)).toStrictEqual(10); // decimal
     expect(getStorageIndex(4.5, 0, 1)).toStrictEqual(4); // approxmity
-
   });
-
 })
+
+
+
+
+
+
+
