@@ -26,7 +26,7 @@ def get_precision(number: Number) -> int:
 
 def get_min_max_log(
     numbers: List[Number], step: Optional[Number] = None, accuracy: Optional[int] = 12
-) -> Tuple[Number, Number, int]:
+) -> Tuple[Number, Number, Number]:
     """
     This function returns an object list of 3 things:
     1. Min value in the list
@@ -53,7 +53,13 @@ def get_min_max_log(
     if minLog == math.inf:
         minLog = 0
     minLog = int(minLog)
-    return (minValue, maxValue, int(minLog))
+
+    if not step:
+        step = math.pow(10, minLog)
+    if step == int(step):
+        step = int(step)
+
+    return (minValue, maxValue, step)
 
 
 def get_storage_index(number: Number, minValue: Number, step: Number):
@@ -145,7 +151,7 @@ def step_sort(
     # print("get_precision", get_precision(minValue))
 
     if not step:
-        step = math.pow(10, get_precision(minValue))
+        step = math.pow(10, minLog)
     if step == int(step):
         step = int(step)
 
