@@ -4,6 +4,11 @@ Efficient sorting algorithm.
 This sorting algorithm has a Time Complexity of **`O(n)`**, **only if used
 within the limitation** that I will talk about in the end.
 
+# My name:
+
+- Omar Magdy ElSayed Yassin
+- عمر مجدي السيد يس
+
 # How it works:
 
 It works on **`4 Steps`**:
