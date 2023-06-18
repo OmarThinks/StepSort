@@ -20,7 +20,7 @@ def get_precision(number: Number) -> int:
         return -len(number_string.split(".")[1])
     precision = 0
     while number % 10 == 0:
-        number /= 10
+        number = round(number / 10, 10)
         precision += 1
     return precision
 
@@ -100,6 +100,25 @@ def get_step_array(
 
     # print(sortedIndexes)
 
+    for number in numbers:
+        storageIndex = get_storage_index(number, minValue, step)
+
+        if not sortedIndexes[storageIndex]:
+            sortedIndexes[storageIndex] = 1
+        else:
+            sortedIndexes[storageIndex] += 1
+
+    return sortedIndexes
+
+
+def get_step_array2(
+    numbers: List[Number],
+    minValue: Number,
+    maxValue: Number,
+    step: Number,
+) -> List[int]:
+    array_length = int(round(1 + ((maxValue - minValue) / step), 10))
+    sortedIndexes: List[int] = [0 for x in range(array_length)]
     for number in numbers:
         storageIndex = get_storage_index(number, minValue, step)
 

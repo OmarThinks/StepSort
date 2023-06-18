@@ -10,6 +10,7 @@ from app import (
     get_storage_index,
     get_value_from_storage_index,
     get_step_array,
+    get_step_array2,
 )
 
 
