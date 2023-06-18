@@ -14,7 +14,7 @@ const areListsEqual = (a: number[], b: number[]) => {
 
 
 
-describe.only('minMaxLog', () => {
+describe('minMaxLog', () => {
 
   test('Normal', () => {
       expect(minMaxLog([0,1,2,3,4,5,6,7,8,9])).toStrictEqual({ minValue:0, maxValue:9, minLog:0});
@@ -48,6 +48,15 @@ describe.only('minMaxLog', () => {
   test('Step is provided', () => {
     expect(minMaxLog([0,1,2,3,4,5,6,7,8,9], 1)).toStrictEqual({ minValue:0, maxValue:9, minLog:0});
   });
+
+  test('Step is provided: decimal', () => {
+    expect(minMaxLog([0,0,.1,.2,.9], 0.1)).toStrictEqual({ minValue:0, maxValue:0.9, minLog:0});
+  });
+
+  /*
+  test.only('Decimal more than 1', () => {
+    expect(minMaxLog([1.1, 1.4])).toStrictEqual({ minValue:1.1, maxValue:1.4, minLog:-1});
+  });*/
 
 })
 
@@ -83,16 +92,16 @@ describe('getValueFromStorageIndex', () => {
 
 describe('getStepArray', () => {
   test('Normal', () => {
-    /*expect(getStepArray([0])).toEqual([1]); // Normal
+    expect(getStepArray([0])).toEqual([1]); // Normal
     expect(areListsEqual(getStepArray([]), [])).toBe(true); // Empty list
     expect(getStepArray([0,0,0,0])).toEqual([4]); // Zeros
     expect(getStepArray([1,2,3,4,5])).toEqual([1,1,1,1,1]); // Positive Normal
     expect(getStepArray([1,1,2,2])).toEqual([2,2]); // Positive
     expect(getStepArray([1,1,0,3,3])).toEqual([1,2,undefined,2]); // Positive
-    expect(getStepArray([-4,-4,2,5])).toEqual([2,undefined,undefined,undefined,undefined,undefined,1,undefined,undefined,1]); // negative*/
-    expect(getStepArray([1.1, 1.4])).toEqual([1, undefined, undefined, 1]); // decimal step
+    expect(getStepArray([-4,-4,2,5])).toEqual([2,undefined,undefined,undefined,undefined,undefined,1,undefined,undefined,1]); // negative
+    //expect(getStepArray([1.1, 1.4])).toEqual([1, undefined, undefined, 1]); // decimal step
     // [ ]: test minMaxLog for decimals, it always returns zero
-    //expect(getValueFromStorageIndex(5, .1, 1)).toBeCloseTo(5.1); // decimal start
+    expect(getValueFromStorageIndex(5, .1, 1)).toBeCloseTo(5.1); // decimal start
   });
 })
 

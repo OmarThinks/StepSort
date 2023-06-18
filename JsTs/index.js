@@ -71,6 +71,7 @@ var getStepArray = function (numbers, step) {
     console.log(4);
     console.log(minLog, "minLog");
     console.log(maxValue, minValue, step);
+    console.log("maxValue: ".concat(maxValue, ", minValue: ").concat(minValue, ", step: ").concat(step, ", minLog: ").concat(minLog, " "));
     console.log("Array length: ", 1 + (maxValue - minValue) / step);
     var sortedIndexes = new Array((maxValue - minValue + 1) / step);
     for (var i = 0; i < numbers.length; i++) {

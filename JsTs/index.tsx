@@ -10,6 +10,35 @@
 
 
 
+export const getPrecision =(number: number) =>{
+    /*
+    let precision = 0;
+    while(number % 1 !== 0){
+        number *= 10;
+        precision++;
+    }
+    return precision
+    */
+
+    if(number === 0 ){return 0}
+
+
+    let numberString = number.toString()
+    if(numberString.includes(".")){
+        return -numberString.split(".")[1].length
+    }
+    let precision = 0;
+    while(number % 1 !== 0){
+        number / 10;
+        precision++;
+    }
+    return precision
+
+
+
+}
+
+
 
 export const minMaxLog = (numbers: number[], step?:number|undefined) => {
     /*
@@ -84,6 +113,7 @@ export const getStepArray = (numbers: number[], step?: number| undefined) => {
 
     console.log(minLog, "minLog")
     console.log(maxValue, minValue, step )
+    console.log(`maxValue: ${maxValue}, minValue: ${minValue}, step: ${step}, minLog: ${minLog} `)
     console.log("Array length: ", 1+(maxValue - minValue)/step)
 
 
