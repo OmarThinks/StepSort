@@ -15,6 +15,9 @@ export const getPrecision =(number: number) =>{
     if(number === 0 ){return 0}
 
     let numberString = number.toString()
+
+    console.log(`number: ${number}, numberString: ${numberString}`)
+
     if(numberString.includes(".")){
         return -numberString.split(".")[1].length
     }
@@ -88,7 +91,7 @@ export const getValueFromStorageIndex = (index: number,min:number,step: number, 
 
 
 export const getStepArray = (numbers: number[], step?: number| undefined) => {
-    //console.log(1)
+    console.log(1)
 
     if(numbers.length === 0){return []}
     
@@ -97,7 +100,7 @@ export const getStepArray = (numbers: number[], step?: number| undefined) => {
             throw new Error("Step cannot be less than or equal to zero")
         }
     }
-    //console.log(2)
+    console.log(2)
 
 
     
@@ -105,18 +108,18 @@ export const getStepArray = (numbers: number[], step?: number| undefined) => {
     if(minValue === Infinity) {return []} // the list is empty
 
 
-    //console.log(3)
+    console.log(3)
 
 
     if(!step) {step = Math.pow(10,minLog)} 
     // if step is not defined, then we set it to the 10^minLog
-    //console.log(4)
+    console.log(4)
 
 
-    //console.log(minLog, "minLog")
-    //console.log(maxValue, minValue, step )
-    //console.log(`maxValue: ${maxValue}, minValue: ${minValue}, step: ${step}, minLog: ${minLog} `)
-    //console.log("Array length: ", 1+(maxValue - minValue)/step)
+    console.log(minLog, "minLog")
+    console.log(maxValue, minValue, step )
+    console.log(`maxValue: ${maxValue}, minValue: ${minValue}, step: ${step}, minLog: ${minLog} `)
+    console.log("Array length: ", 1+(maxValue - minValue)/step)
 
 
     const sortedIndexes: number[] = new Array((maxValue - minValue+1)/step);
@@ -219,9 +222,9 @@ const stepSort = (numbers: number[], step?: number| undefined) => {
     //console.log("Array length: ", 1+(maxValue - minValue)/step)
 
 
-    const sortedIndexes: number[] = getStepArray2(numbers, minValue, maxValue, step);
+    const stepArray: number[] = getStepArray2(numbers, minValue, maxValue, step);
 
-    return sortedIndexes
+    return stepArray
 }
 
 //export default stepSort;

@@ -1,5 +1,5 @@
 //import { minMaxLog } from ".";
-var _a = require('.'), getPrecision = _a.getPrecision, minMaxLog = _a.minMaxLog, getStorageIndex = _a.getStorageIndex, getValueFromStorageIndex = _a.getValueFromStorageIndex, getStepArray = _a.getStepArray;
+var _a = require('.'), getPrecision = _a.getPrecision, minMaxLog = _a.minMaxLog, getStorageIndex = _a.getStorageIndex, getValueFromStorageIndex = _a.getValueFromStorageIndex, getStepArray = _a.getStepArray, getStepArray2 = _a.getStepArray2;
 var areListsEqual = function (a, b) {
     if (a.length !== b.length)
         return false;
@@ -84,8 +84,10 @@ describe('getStepArray', function () {
         expect(getStepArray([1, 1, 2, 2])).toEqual([2, 2]); // Positive
         expect(getStepArray([1, 1, 0, 3, 3])).toEqual([1, 2, undefined, 2]); // Positive
         expect(getStepArray([-4, -4, 2, 5])).toEqual([2, undefined, undefined, undefined, undefined, undefined, 1, undefined, undefined, 1]); // negative
-        //expect(getStepArray([1.1, 1.4])).toEqual([1, undefined, undefined, 1]); // decimal step
-        // [ ]: test minMaxLog for decimals, it always returns zero
+        expect(getStepArray([1.1, 1.4])).toEqual([1, undefined, undefined, 1]); // decimal step
         expect(getValueFromStorageIndex(5, .1, 1)).toBeCloseTo(5.1); // decimal start
+    });
+    test.only('Normal', function () {
+        expect(getStepArray([1.1, 1.4])).toEqual([1, undefined, undefined, 1]); // decimal step
     });
 });

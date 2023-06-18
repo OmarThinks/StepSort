@@ -1,5 +1,5 @@
 //import { minMaxLog } from ".";
-const { getPrecision, minMaxLog, getStorageIndex, getValueFromStorageIndex, getStepArray } = require('.');
+const { getPrecision, minMaxLog, getStorageIndex, getValueFromStorageIndex, getStepArray, getStepArray2 } = require('.');
 
 
 const areListsEqual = (a: number[], b: number[]) => {
@@ -118,11 +118,21 @@ describe('getStepArray', () => {
     expect(getStepArray([1,1,2,2])).toEqual([2,2]); // Positive
     expect(getStepArray([1,1,0,3,3])).toEqual([1,2,undefined,2]); // Positive
     expect(getStepArray([-4,-4,2,5])).toEqual([2,undefined,undefined,undefined,undefined,undefined,1,undefined,undefined,1]); // negative
-    //expect(getStepArray([1.1, 1.4])).toEqual([1, undefined, undefined, 1]); // decimal step
-    // [ ]: test minMaxLog for decimals, it always returns zero
+    expect(getStepArray([1.1, 1.4])).toEqual([1, undefined, undefined, 1]); // decimal step
     expect(getValueFromStorageIndex(5, .1, 1)).toBeCloseTo(5.1); // decimal start
   });
+
+
+  test.only('Normal', () => {
+
+    expect(getStepArray([1.1, 1.4])).toEqual([1, undefined, undefined, 1]); // decimal step
+
+  })
+
 })
+
+
+
 
 
 

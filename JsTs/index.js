@@ -6,12 +6,13 @@
     n: number of elemnts in list
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getStepArray = exports.getValueFromStorageIndex = exports.getStorageIndex = exports.minMaxLog = exports.getPrecision = void 0;
+exports.getStepArray2 = exports.getStepArray = exports.getValueFromStorageIndex = exports.getStorageIndex = exports.minMaxLog = exports.getPrecision = void 0;
 var getPrecision = function (number) {
     if (number === 0) {
         return 0;
     }
     var numberString = number.toString();
+    console.log("number: ".concat(number, ", numberString: ").concat(numberString));
     if (numberString.includes(".")) {
         return -numberString.split(".")[1].length;
     }
@@ -74,7 +75,7 @@ var getValueFromStorageIndex = function (index, min, step) {
 };
 exports.getValueFromStorageIndex = getValueFromStorageIndex;
 var getStepArray = function (numbers, step) {
-    //console.log(1)
+    console.log(1);
     if (numbers.length === 0) {
         return [];
     }
@@ -83,21 +84,21 @@ var getStepArray = function (numbers, step) {
             throw new Error("Step cannot be less than or equal to zero");
         }
     }
-    //console.log(2)
+    console.log(2);
     var _a = (0, exports.minMaxLog)(numbers, step), minValue = _a.minValue, maxValue = _a.maxValue, minLog = _a.minLog;
     if (minValue === Infinity) {
         return [];
     } // the list is empty
-    //console.log(3)
+    console.log(3);
     if (!step) {
         step = Math.pow(10, minLog);
     }
     // if step is not defined, then we set it to the 10^minLog
-    //console.log(4)
-    //console.log(minLog, "minLog")
-    //console.log(maxValue, minValue, step )
-    //console.log(`maxValue: ${maxValue}, minValue: ${minValue}, step: ${step}, minLog: ${minLog} `)
-    //console.log("Array length: ", 1+(maxValue - minValue)/step)
+    console.log(4);
+    console.log(minLog, "minLog");
+    console.log(maxValue, minValue, step);
+    console.log("maxValue: ".concat(maxValue, ", minValue: ").concat(minValue, ", step: ").concat(step, ", minLog: ").concat(minLog, " "));
+    console.log("Array length: ", 1 + (maxValue - minValue) / step);
     var sortedIndexes = new Array((maxValue - minValue + 1) / step);
     for (var i = 0; i < numbers.length; i++) {
         //sortedIndexes[i] = 0
@@ -127,28 +128,50 @@ var getStepArray = function (numbers, step) {
     return sortedIndexes;
 };
 exports.getStepArray = getStepArray;
+var getStepArray2 = function (numbers, minValue, maxValue, step) {
+    var stepArray = new Array((maxValue - minValue + 1) / step);
+    for (var i = 0; i < numbers.length; i++) {
+        var number = numbers[i];
+        var storageIndex = (0, exports.getStorageIndex)(number, minValue, step);
+        if (!stepArray[storageIndex]) {
+            stepArray[storageIndex] = 1;
+        }
+        else {
+            stepArray[(0, exports.getStorageIndex)(number, minValue, step)] += 1;
+        }
+        //console.log(sortedIndexes)
+    }
+    //console.log(sortedIndexes)
+    return stepArray;
+};
+exports.getStepArray2 = getStepArray2;
 // getStepArray([1,2,3,4,20, 1, 1, 1])
 var stepSort = function (numbers, step) {
+    //console.log(1)
+    if (numbers.length === 0) {
+        return [];
+    }
     if (typeof (step) !== "undefined") {
         if (step <= 0) {
             throw new Error("Step cannot be less than or equal to zero");
         }
     }
+    //console.log(2)
     var _a = (0, exports.minMaxLog)(numbers, step), minValue = _a.minValue, maxValue = _a.maxValue, minLog = _a.minLog;
+    if (minValue === Infinity) {
+        return [];
+    } // the list is empty
+    //console.log(3)
     if (!step) {
-        step = Math.pow(10, minLog) + 1;
+        step = Math.pow(10, minLog);
     }
-    var sortedIndexes = new Array(1 + (maxValue - minValue) / step);
-    for (var _i = 0, numbers_2 = numbers; _i < numbers_2.length; _i++) {
-        var number = numbers_2[_i];
-        var storageIndex = (0, exports.getStorageIndex)(number, minValue, step);
-        if (!sortedIndexes[storageIndex]) {
-            sortedIndexes[storageIndex] = 1;
-        }
-        else {
-            sortedIndexes[(0, exports.getStorageIndex)(number, minValue, step)] += 1;
-        }
-    }
-    //console.log(sortedIndexes)
+    // if step is not defined, then we set it to the 10^minLog
+    //console.log(4)
+    //console.log(minLog, "minLog")
+    //console.log(maxValue, minValue, step )
+    //console.log(`maxValue: ${maxValue}, minValue: ${minValue}, step: ${step}, minLog: ${minLog} `)
+    //console.log("Array length: ", 1+(maxValue - minValue)/step)
+    var stepArray = (0, exports.getStepArray2)(numbers, minValue, maxValue, step);
+    return stepArray;
 };
 //export default stepSort;
