@@ -24,14 +24,14 @@ def get_precision(number: Number) -> int:
     return precision
 
 
-def get_min_max_log(
+def get_min_max_step(
     numbers: List[Number], step: Optional[Number] = None, accuracy: Optional[int] = 12
 ) -> Tuple[Number, Number, Number]:
     """
     This function returns an object list of 3 things:
     1. Min value in the list
     2. Max value in the list
-    3. Min log in the list (Rounded down to integer
+    3. Step
     """
     minValue: Number = math.inf
     maxValue: Number = -math.inf
@@ -82,9 +82,9 @@ def get_step_array_full(
     if step:
         if step <= 0:
             raise Exception("Step cannot be less than or equal to zero")
-    (minValue, maxValue, step) = get_min_max_log(numbers, step, accuracy)
+    (minValue, maxValue, step) = get_min_max_step(numbers, step, accuracy)
 
-    # print(minValue, maxValue, minLog)
+    # print(minValue, maxValue, step)
     # print(step)
     array_length = int(round(1 + ((maxValue - minValue) / step), 10))
     # print("array_length: ", array_length)
@@ -142,7 +142,7 @@ def step_sort(
     if step:
         if step <= 0:
             raise Exception("Step cannot be less than or equal to zero")
-    (minValue, maxValue, step) = get_min_max_log(numbers, step, accuracy)
+    (minValue, maxValue, step) = get_min_max_step(numbers, step, accuracy)
 
     # print("minValue", minValue)
     # print("get_precision", get_precision(minValue))
