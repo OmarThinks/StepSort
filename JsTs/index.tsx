@@ -22,20 +22,20 @@ export const getPrecision =(number: number) =>{
 
     if(number === 0 ){return 0}
 
-
     let numberString = number.toString()
     if(numberString.includes(".")){
         return -numberString.split(".")[1].length
     }
     let precision = 0;
-    while(number % 1 !== 0){
-        number / 10;
+
+
+    while(number % 10 === 0){
+        console.log(number % 1)
+        number /= 10;
         precision++;
     }
+    
     return precision
-
-
-
 }
 
 

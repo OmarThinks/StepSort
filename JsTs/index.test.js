@@ -1,5 +1,5 @@
 //import { minMaxLog } from ".";
-var _a = require('.'), minMaxLog = _a.minMaxLog, getStorageIndex = _a.getStorageIndex, getValueFromStorageIndex = _a.getValueFromStorageIndex, getStepArray = _a.getStepArray;
+var _a = require('.'), getPrecision = _a.getPrecision, minMaxLog = _a.minMaxLog, getStorageIndex = _a.getStorageIndex, getValueFromStorageIndex = _a.getValueFromStorageIndex, getStepArray = _a.getStepArray;
 var areListsEqual = function (a, b) {
     if (a.length !== b.length)
         return false;
@@ -9,6 +9,20 @@ var areListsEqual = function (a, b) {
     }
     return true;
 };
+describe('getPrecision', function () {
+    test('getPrecision', function () {
+        expect(getPrecision(0)).toBe(0); // Zero
+        expect(getPrecision(-1)).toBe(0); // negative
+        expect(getPrecision(1)).toBe(0); // Positive
+        expect(getPrecision(1000)).toBe(3); // Positive Thousand
+        expect(getPrecision(-1000)).toBe(3); // Negative Thousand
+        expect(getPrecision(1.43)).toBe(-2); // Negative Thousand
+        expect(getPrecision(-1.43)).toBe(-2); // Negative Thousand
+    });
+    test('getPrecision', function () {
+        //expect(getPrecision(1000)).toBe(3); // Positive Thousand
+    });
+});
 describe('minMaxLog', function () {
     test('Normal', function () {
         expect(minMaxLog([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])).toStrictEqual({ minValue: 0, maxValue: 9, minLog: 0 });

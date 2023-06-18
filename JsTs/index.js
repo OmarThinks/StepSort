@@ -6,7 +6,32 @@
     n: number of elemnts in list
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getStepArray = exports.getValueFromStorageIndex = exports.getStorageIndex = exports.minMaxLog = void 0;
+exports.getStepArray = exports.getValueFromStorageIndex = exports.getStorageIndex = exports.minMaxLog = exports.getPrecision = void 0;
+var getPrecision = function (number) {
+    /*
+    let precision = 0;
+    while(number % 1 !== 0){
+        number *= 10;
+        precision++;
+    }
+    return precision
+    */
+    if (number === 0) {
+        return 0;
+    }
+    var numberString = number.toString();
+    if (numberString.includes(".")) {
+        return -numberString.split(".")[1].length;
+    }
+    var precision = 0;
+    while (number % 10 === 0) {
+        console.log(number % 1);
+        number /= 10;
+        precision++;
+    }
+    return precision;
+};
+exports.getPrecision = getPrecision;
 var minMaxLog = function (numbers, step) {
     /*
         This function returns an object list of 3 things:
