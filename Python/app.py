@@ -67,6 +67,10 @@ def get_value_from_storage_index(index: Number, minValue: Number, step: Number):
 def get_step_array_full(
     numbers: List[Number], step: Optional[Number] = None, accuracy: Optional[int] = 12
 ) -> List[int]:
+    """
+    This function is not jused in the end
+    It is Just for testing
+    """
     if len(numbers) == 0:
         return []
     if step:
@@ -106,6 +110,8 @@ def get_step_array(
             step_array[storageIndex] = 1
         else:
             step_array[storageIndex] += 1
+    # print("step_array", step_array)
+
     return step_array
 
 
@@ -115,12 +121,17 @@ def get_sorted_array(step_array: List[int], min_value: Number, step: Number):
         if value:
             valueToAdd = get_value_from_storage_index(index, min_value, step)
             extension = [valueToAdd for x in range(value)]
+            # print("extension", extension, index, min_value, step)
             sorted_array.extend(extension)
+    # print("sorted_array", sorted_array)
     return sorted_array
 
 
 def step_sort(
-    numbers: List[Number], step: Optional[Number] = None, accuracy: Optional[int] = 12
+    numbers: List[Number],
+    step: Optional[Number] = None,
+    reversed: Optional[bool] = False,
+    accuracy: Optional[int] = 12,
 ):
     if len(numbers) <= 1:
         # The list is empty or already sorted
@@ -130,10 +141,20 @@ def step_sort(
             raise Exception("Step cannot be less than or equal to zero")
     (minValue, maxValue, minLog) = get_min_max_log(numbers, step, accuracy)
 
+    # print("minValue", minValue)
+    # print("get_precision", get_precision(minValue))
+
     if not step:
         step = math.pow(10, get_precision(minValue))
+    if step == int(step):
+        step = int(step)
 
     step_array = get_step_array(numbers, minValue, maxValue, step)
     sorted_array = get_sorted_array(step_array, minValue, step)
+
+    if reversed:
+        sorted_array.reverse()
+
+    # print(numbers, sorted_array)
 
     return sorted_array

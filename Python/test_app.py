@@ -103,6 +103,7 @@ class TestStepSort(unittest.TestCase):
         self.assertEqual(step_sort([]), [])  # Empty
         self.assertEqual(step_sort([100]), [100])  # One element
         self.assertEqual(step_sort([2, 1, 3]), [1, 2, 3])  # Normal
+        # self.assertEqual(step_sort([2, 1, 3]), [3, 2, 1])  # reversed
         self.assertEqual(step_sort([2, 1, 5]), [1, 2, 5])  # Empty places
         self.assertEqual(step_sort([2, 1, 5]), [1, 2, 5])  # Empty places
         self.assertEqual(step_sort([0.1, -0.1]), [-0.1, 0.1])  # Floats
