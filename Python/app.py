@@ -1,4 +1,4 @@
-from typing import Union, Optional
+from typing import Union, Optional, Tuple, Sequence
 
 Number = Union[int, float]
 
@@ -70,5 +70,29 @@ export const minMaxLog = (numbers: number[], step?:number|undefined) => {
 """
 
 
-def get_min_max_log(numbers: Union[int, float], step: Optional[int] = 1):
-    pass
+def get_min_max_log(
+    numbers: Union[int, float], step: Optional[int] = 1
+) -> Tuple[Number, Number, int]:
+    """
+    This function gets the precision
+    1,2,3,4,0: 0
+    0.1,-0.1: -1
+
+    100, -100: 2
+    """
+    if numbers == 0:
+        return (0, 0, 0)
+    number_string = str(numbers)
+    if "." in number_string:
+        return (
+            numbers,
+            numbers,
+            get_precision(numbers),
+        )
+    precision = 0
+    while numbers % 10 == 0:
+        numbers /= 10
+        precision += 1
+    return (numbers, numbers, precision)
+
+    return (1, 1, 1)
