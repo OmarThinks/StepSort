@@ -1,5 +1,6 @@
 from typing import Union, Optional, Tuple, Sequence, List
 import math
+from decimal import Decimal
 
 Number = Union[int, float]
 
@@ -25,7 +26,7 @@ def get_precision(number: Number) -> int:
 
 
 def get_min_max_log(
-    numbers: List[Number], step: Optional[Number] = None
+    numbers: List[Number], step: Optional[Number] = None, accuracy: Optional[int] = 12
 ) -> Tuple[Number, Number, int]:
     """
     This function returns an object list of 3 things:
@@ -50,7 +51,7 @@ def get_min_max_log(
                 continue
             if number == minValue:
                 continue
-            currentLog = get_precision(number - minValue)
+            currentLog = get_precision(round(number - minValue, 12))
             # print("currentLog", currentLog, number, minValue)
             if currentLog < minLog:
                 minLog = currentLog
@@ -63,87 +64,16 @@ def get_min_max_log(
 
 
 def get_storage_index(number: Number, minValue: Number, step: Number):
-    return math.floor((number - minValue) / step)
+    return int(round((number - minValue) / step, 10))
 
 
 def get_value_from_storage_index(index: Number, minValue: Number, step: Number):
     return index * step + minValue
 
 
-"""
-export const getStepArray = (numbers: number[], step?: number| undefined) => {
-    console.log(1)
-
-    if(numbers.length === 0){return []}
-    
-    if(typeof(step)!=="undefined"){
-        if(step<=0){
-            throw new Error("Step cannot be less than or equal to zero")
-        }
-    }
-    console.log(2)
-
-
-    
-    const {minValue,maxValue,minLog} = minMaxLog(numbers, step)
-    if(minValue === Infinity) {return []} // the list is empty
-
-
-    console.log(3)
-
-
-    if(!step) {step = Math.pow(10,minLog)} 
-    // if step is not defined, then we set it to the 10^minLog
-    console.log(4)
-
-
-    console.log(minLog, "minLog")
-    console.log(maxValue, minValue, step )
-    console.log(`maxValue: ${maxValue}, minValue: ${minValue}, step: ${step}, minLog: ${minLog} `)
-    console.log("Array length: ", 1+(maxValue - minValue)/step)
-
-
-    const sortedIndexes: number[] = new Array((maxValue - minValue+1)/step);
-
-
-    for(let i = 0; i < numbers.length; i++){
-        //sortedIndexes[i] = 0
-        
-        let number = numbers[i]
-
-        let storageIndex = getStorageIndex(number,minValue,step)
-
-        if(!sortedIndexes[storageIndex]){
-            sortedIndexes[storageIndex] = 1
-        }
-        else{
-            sortedIndexes[getStorageIndex(number,minValue,step)]+=1
-        }
-
-        //console.log(sortedIndexes)
-
-    }
-
-    /*
-    for (let number of numbers) {
-        let storageIndex = getStorageIndex(number,minValue,step)
-
-        if(!sortedIndexes[storageIndex]){
-            sortedIndexes[storageIndex] = 1
-        }
-        else{
-            sortedIndexes[getStorageIndex(number,minValue,step)]+=1
-        }
-    }
-    */
-    
-    //console.log(sortedIndexes)
-    return sortedIndexes
-}
-"""
-
-
-def get_step_array(numbers: List[Number], step: Optional[Number] = None) -> List[int]:
+def get_step_array(
+    numbers: List[Number], step: Optional[Number] = None, accuracy: Optional[int] = 12
+) -> List[int]:
     if len(numbers) == 0:
         return []
 
@@ -151,7 +81,7 @@ def get_step_array(numbers: List[Number], step: Optional[Number] = None) -> List
         if step <= 0:
             raise Exception("Step cannot be less than or equal to zero")
 
-    (minValue, maxValue, minLog) = get_min_max_log(numbers, step)
+    (minValue, maxValue, minLog) = get_min_max_log(numbers, step, accuracy)
 
     if minValue == math.inf:
         return []  # I don't think that this will happen
@@ -159,9 +89,16 @@ def get_step_array(numbers: List[Number], step: Optional[Number] = None) -> List
     if not step:
         step = math.pow(10, get_precision(minValue))
 
-    array_length = int(1 + ((maxValue - minValue) / step))
+    # print(minValue, maxValue, minLog)
+    # print(step)
+
+    array_length = int(round(1 + ((maxValue - minValue) / step), 10))
+
+    # print("array_length: ", array_length)
 
     sortedIndexes: List[int] = [0 for x in range(array_length)]
+
+    # print(sortedIndexes)
 
     for number in numbers:
         storageIndex = get_storage_index(number, minValue, step)
