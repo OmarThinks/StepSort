@@ -4,7 +4,12 @@ Testing the sorting algorithm
 
 import unittest
 
-from app import get_precision, get_min_max_log
+from app import (
+    get_precision,
+    get_min_max_log,
+    get_storage_index,
+    get_value_from_storage_index,
+)
 
 
 class TestGetPrecision(unittest.TestCase):
@@ -52,7 +57,6 @@ class TestGetMinMaxLog(unittest.TestCase):
                 0,
             ),
         )
-        print(get_min_max_log([0, 100, 200, 300, 400, 500, 600, 700, 800, 900]))
         self.assertEqual(
             get_min_max_log([0, 100, 200, 300, 400, 500, 600, 700, 800, 900]),
             (0, 900, 2),
@@ -63,6 +67,40 @@ class TestGetMinMaxLog(unittest.TestCase):
         )
         self.assertEqual(get_min_max_log([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 1), (0, 9, 0))
         self.assertEqual(get_min_max_log([0, 0, 0.1, 0.2, 0.9], 0.1), (0, 0.9, 0))
+
+
+class TestGetStorageIndex(unittest.TestCase):
+    """
+    Testing the get_storage_index function
+    """
+
+    def test_get_storage_index(self):
+        """
+        Testing the get_storage_index function
+        """
+        self.assertEqual(get_storage_index(0, 0, 1), 0)
+        self.assertEqual(get_storage_index(5, 0, 1), 5)
+        self.assertEqual(get_storage_index(5, 1, 1), 4)
+        self.assertEqual(get_storage_index(-5, -10, 1), 5)
+        self.assertEqual(get_storage_index(1, 0, 0.1), 10)
+        self.assertEqual(get_storage_index(4.5, 0, 1), 4)
+
+
+class TestGetValueFromStorageIndex(unittest.TestCase):
+    """
+    Testing the get_value_from_storage_index function
+    """
+
+    def test_get_value_from_storage_index(self):
+        """
+        Testing the get_value_from_storage_index function
+        """
+        self.assertEqual(get_value_from_storage_index(0, 0, 1), 0)
+        self.assertEqual(get_value_from_storage_index(5, 0, 1), 5)
+        self.assertEqual(get_value_from_storage_index(5, 1, 1), 6)
+        self.assertEqual(get_value_from_storage_index(5, -10, 1), -5)
+        self.assertEqual(get_value_from_storage_index(4, 5, 0.1), 5.4)
+        self.assertEqual(get_value_from_storage_index(5, 0.1, 1), 5.1)
 
 
 if __name__ == "__main__":

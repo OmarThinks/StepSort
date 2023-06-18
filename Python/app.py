@@ -60,3 +60,11 @@ def get_min_max_log(
     minLog = int(minLog)
 
     return (minValue, maxValue, int(minLog))
+
+
+def get_storage_index(number: Number, minValue: Number, step: Number):
+    return math.floor((number - minValue) / step)
+
+
+def get_value_from_storage_index(index: Number, minValue: Number, step: Number):
+    return index * step + minValue
