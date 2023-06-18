@@ -1,4 +1,5 @@
-from typing import Union, Optional, Tuple, Sequence
+from typing import Union, Optional, Tuple, Sequence, List
+import math
 
 Number = Union[int, float]
 
@@ -23,76 +24,39 @@ def get_precision(number: Number) -> int:
     return precision
 
 
-"""
-export const minMaxLog = (numbers: number[], step?:number|undefined) => {
-    /*
-        This function returns an object list of 3 things:
-        1. Min value in the list
-        2. Max value in the list
-        3. Min log in the list (Rounded down to integer)
-    */
-    
-    let minValue = Infinity
-    let maxValue = -Infinity
-    let minLog: number = Infinity
-    let currentLog= undefined;
-
-    minValue = Math.min(...numbers)
-
-
-
-    for (let number of numbers) {
-        if (number > maxValue) {
-            maxValue = number
-        }
-        
-        if(!step){
-            if(number === 0 ) {continue}
-            //currentLog = Math.log(Math.abs(number- minValue))/Math.log(10)
-            if(number === minValue){continue}
-            currentLog = getPrecision(number- minValue)
-            //console.log("currentLog", currentLog, number, minValue)
-            //if (currentLog < minLog) {
-            //if (currentLog > minLog) {
-            if (currentLog < minLog) {
-                minLog = currentLog
-            }
-        }
-    }
-
-    
-    if(minLog === Infinity) {minLog = 0}
-    minLog = Math.floor(minLog)
-    
-
-    return { minValue, maxValue, minLog}
-}
-"""
-
-
 def get_min_max_log(
-    numbers: Union[int, float], step: Optional[int] = 1
+    numbers: List[Number], step: Optional[int] = None
 ) -> Tuple[Number, Number, int]:
     """
-    This function gets the precision
-    1,2,3,4,0: 0
-    0.1,-0.1: -1
-
-    100, -100: 2
+    This function returns an object list of 3 things:
+    1. Min value in the list
+    2. Max value in the list
+    3. Min log in the list (Rounded down to integer)
     """
-    if numbers == 0:
-        return (0, 0, 0)
-    number_string = str(numbers)
-    if "." in number_string:
-        return (
-            numbers,
-            numbers,
-            get_precision(numbers),
-        )
-    precision = 0
-    while numbers % 10 == 0:
-        numbers /= 10
-        precision += 1
-    return (numbers, numbers, precision)
 
-    return (1, 1, 1)
+    minValue: Number = math.inf
+    maxValue: Number = -math.inf
+    minLog: float = math.inf
+    currentLog = None
+
+    minValue = min(numbers)
+
+    for number in numbers:
+        if number > maxValue:
+            maxValue = number
+
+        if not step:
+            if number == 0:
+                continue
+            if number == minValue:
+                continue
+            currentLog = get_precision(number - minValue)
+            # print("currentLog", currentLog, number, minValue)
+            if currentLog < minLog:
+                minLog = currentLog
+
+    if minLog == math.inf:
+        minLog = 0
+    minLog = int(minLog)
+
+    return (minValue, maxValue, int(minLog))
