@@ -150,6 +150,8 @@ def step_sort(
     step_array = get_step_array(numbers, minValue, maxValue, step)
     sorted_array = get_sorted_array(step_array, minValue, step)
 
+    # print("sorted_array before", sorted_array)
+
     if reversed:
         sorted_array.reverse()
 
