@@ -10,6 +10,7 @@ from app import (
     get_step_array_full,
     get_step_array,
     get_sorted_array,
+    step_sort,
 )
 
 
@@ -95,6 +96,18 @@ class TestGetSortedArray(unittest.TestCase):
         self.assertEqual(get_sorted_array([1, 0, 1], 1, 0.1), [1, 1.2])  # Empty element
         self.assertEqual(get_sorted_array([2, 0, 3], 1, 1), [1, 1, 3, 3, 3])  # repeated
         self.assertEqual(get_sorted_array([1, 0, 1], -1, 1), [-1, 1])  # negatives
+
+
+class TestStepSort(unittest.TestCase):
+    def test_step_sort(self):
+        self.assertEqual(step_sort([]), [])  # Empty
+        self.assertEqual(step_sort([100]), [100])  # One element
+        self.assertEqual(step_sort([2, 1, 3]), [1, 2, 3])  # Normal
+        self.assertEqual(step_sort([2, 1, 5]), [1, 2, 5])  # Empty places
+        self.assertEqual(step_sort([2, 1, 5]), [1, 2, 5])  # Empty places
+        self.assertEqual(step_sort([0.1, -0.1]), [-0.1, 0.1])  # Floats
+        self.assertEqual(step_sort([300, 0, 100]), [0, 100, 300])  # Hundreds
+        self.assertEqual(step_sort([301, 1, 101]), [1, 101, 301])  # Hundreds With step
 
 
 if __name__ == "__main__":
