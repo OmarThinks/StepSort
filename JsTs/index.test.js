@@ -16,11 +16,8 @@ describe('getPrecision', function () {
         expect(getPrecision(1)).toBe(0); // Positive
         expect(getPrecision(1000)).toBe(3); // Positive Thousand
         expect(getPrecision(-1000)).toBe(3); // Negative Thousand
-        expect(getPrecision(1.43)).toBe(-2); // Negative Thousand
-        expect(getPrecision(-1.43)).toBe(-2); // Negative Thousand
-    });
-    test('getPrecision', function () {
-        //expect(getPrecision(1000)).toBe(3); // Positive Thousand
+        expect(getPrecision(1.43)).toBe(-2); // Positive decimal
+        expect(getPrecision(-1.43)).toBe(-2); // Negative decimal
     });
 });
 describe('minMaxLog', function () {

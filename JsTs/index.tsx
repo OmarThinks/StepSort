@@ -47,10 +47,13 @@ export const minMaxLog = (numbers: number[], step?:number|undefined) => {
         2. Max value in the list
         3. Min log in the list (Rounded down to integer)
     */
+    
     let minValue = Infinity
     let maxValue = -Infinity
     let minLog: number = Infinity
     let currentLog= undefined;
+
+
 
     for (let number of numbers) {
         if (number < minValue) {
@@ -90,6 +93,8 @@ export const getValueFromStorageIndex = (index: number,min:number,step: number, 
 
 export const getStepArray = (numbers: number[], step?: number| undefined) => {
     console.log(1)
+
+    
     if(typeof(step)!=="undefined"){
         if(step<=0){
             throw new Error("Step cannot be less than or equal to zero")
