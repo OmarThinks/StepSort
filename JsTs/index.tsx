@@ -59,7 +59,7 @@ export const minMaxLog = (numbers: number[], step?:number|undefined) => {
             //currentLog = Math.log(Math.abs(number- minValue))/Math.log(10)
             if(number === minValue){continue}
             currentLog = getPrecision(number- minValue)
-            console.log("currentLog", currentLog, number, minValue)
+            //console.log("currentLog", currentLog, number, minValue)
             //if (currentLog < minLog) {
             //if (currentLog > minLog) {
             if (currentLog < minLog) {
@@ -88,7 +88,7 @@ export const getValueFromStorageIndex = (index: number,min:number,step: number, 
 
 
 export const getStepArray = (numbers: number[], step?: number| undefined) => {
-    console.log(1)
+    //console.log(1)
 
     if(numbers.length === 0){return []}
     
@@ -97,7 +97,7 @@ export const getStepArray = (numbers: number[], step?: number| undefined) => {
             throw new Error("Step cannot be less than or equal to zero")
         }
     }
-    console.log(2)
+    //console.log(2)
 
 
     
@@ -105,18 +105,18 @@ export const getStepArray = (numbers: number[], step?: number| undefined) => {
     if(minValue === Infinity) {return []} // the list is empty
 
 
-    console.log(3)
+    //console.log(3)
 
 
     if(!step) {step = Math.pow(10,minLog)} 
     // if step is not defined, then we set it to the 10^minLog
-    console.log(4)
+    //console.log(4)
 
 
-    console.log(minLog, "minLog")
-    console.log(maxValue, minValue, step )
-    console.log(`maxValue: ${maxValue}, minValue: ${minValue}, step: ${step}, minLog: ${minLog} `)
-    console.log("Array length: ", 1+(maxValue - minValue)/step)
+    //console.log(minLog, "minLog")
+    //console.log(maxValue, minValue, step )
+    //console.log(`maxValue: ${maxValue}, minValue: ${minValue}, step: ${step}, minLog: ${minLog} `)
+    //console.log("Array length: ", 1+(maxValue - minValue)/step)
 
 
     const sortedIndexes: number[] = new Array((maxValue - minValue+1)/step);
@@ -160,39 +160,68 @@ export const getStepArray = (numbers: number[], step?: number| undefined) => {
 
 
 
+
+export const getStepArray2 = (numbers:number[], minValue:number, maxValue:number, step: number) => {
+
+    const stepArray: number[] = new Array((maxValue - minValue+1)/step);
+
+    for(let i = 0; i < numbers.length; i++){        
+        let number = numbers[i]
+        let storageIndex = getStorageIndex(number,minValue,step)
+        if(!stepArray[storageIndex]){
+            stepArray[storageIndex] = 1
+        }
+        else{
+            stepArray[getStorageIndex(number,minValue,step)]+=1
+        }
+        //console.log(sortedIndexes)
+    }
+
+    
+    //console.log(sortedIndexes)
+    return stepArray
+}
+
+
+
+
 // getStepArray([1,2,3,4,20, 1, 1, 1])
 
 const stepSort = (numbers: number[], step?: number| undefined) => {
+    //console.log(1)
 
+    if(numbers.length === 0){return []}
+    
     if(typeof(step)!=="undefined"){
         if(step<=0){
             throw new Error("Step cannot be less than or equal to zero")
         }
     }
+    //console.log(2)
 
 
     
     const {minValue,maxValue,minLog} = minMaxLog(numbers, step)
-
-    if(!step) {step = Math.pow(10,minLog) + 1}
-
+    if(minValue === Infinity) {return []} // the list is empty
 
 
+    //console.log(3)
 
-    const sortedIndexes: number[] = new Array(1+(maxValue - minValue)/step);
 
-    for (let number of numbers) {
-        let storageIndex = getStorageIndex(number,minValue,step)
-        if(!sortedIndexes[storageIndex]){
-            sortedIndexes[storageIndex] = 1
-        }
-        else{
-            sortedIndexes[getStorageIndex(number,minValue,step)]+=1
-        }
-    }
-    
-    //console.log(sortedIndexes)
-    
+    if(!step) {step = Math.pow(10,minLog)} 
+    // if step is not defined, then we set it to the 10^minLog
+    //console.log(4)
+
+
+    //console.log(minLog, "minLog")
+    //console.log(maxValue, minValue, step )
+    //console.log(`maxValue: ${maxValue}, minValue: ${minValue}, step: ${step}, minLog: ${minLog} `)
+    //console.log("Array length: ", 1+(maxValue - minValue)/step)
+
+
+    const sortedIndexes: number[] = getStepArray2(numbers, minValue, maxValue, step);
+
+    return sortedIndexes
 }
 
 //export default stepSort;

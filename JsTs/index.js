@@ -50,7 +50,7 @@ var minMaxLog = function (numbers, step) {
                 continue;
             }
             currentLog = (0, exports.getPrecision)(number - minValue);
-            console.log("currentLog", currentLog, number, minValue);
+            //console.log("currentLog", currentLog, number, minValue)
             //if (currentLog < minLog) {
             //if (currentLog > minLog) {
             if (currentLog < minLog) {
@@ -74,7 +74,7 @@ var getValueFromStorageIndex = function (index, min, step) {
 };
 exports.getValueFromStorageIndex = getValueFromStorageIndex;
 var getStepArray = function (numbers, step) {
-    console.log(1);
+    //console.log(1)
     if (numbers.length === 0) {
         return [];
     }
@@ -83,21 +83,21 @@ var getStepArray = function (numbers, step) {
             throw new Error("Step cannot be less than or equal to zero");
         }
     }
-    console.log(2);
+    //console.log(2)
     var _a = (0, exports.minMaxLog)(numbers, step), minValue = _a.minValue, maxValue = _a.maxValue, minLog = _a.minLog;
     if (minValue === Infinity) {
         return [];
     } // the list is empty
-    console.log(3);
+    //console.log(3)
     if (!step) {
         step = Math.pow(10, minLog);
     }
     // if step is not defined, then we set it to the 10^minLog
-    console.log(4);
-    console.log(minLog, "minLog");
-    console.log(maxValue, minValue, step);
-    console.log("maxValue: ".concat(maxValue, ", minValue: ").concat(minValue, ", step: ").concat(step, ", minLog: ").concat(minLog, " "));
-    console.log("Array length: ", 1 + (maxValue - minValue) / step);
+    //console.log(4)
+    //console.log(minLog, "minLog")
+    //console.log(maxValue, minValue, step )
+    //console.log(`maxValue: ${maxValue}, minValue: ${minValue}, step: ${step}, minLog: ${minLog} `)
+    //console.log("Array length: ", 1+(maxValue - minValue)/step)
     var sortedIndexes = new Array((maxValue - minValue + 1) / step);
     for (var i = 0; i < numbers.length; i++) {
         //sortedIndexes[i] = 0
