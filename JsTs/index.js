@@ -8,14 +8,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getStepArray = exports.getValueFromStorageIndex = exports.getStorageIndex = exports.minMaxLog = exports.getPrecision = void 0;
 var getPrecision = function (number) {
-    /*
-    let precision = 0;
-    while(number % 1 !== 0){
-        number *= 10;
-        precision++;
-    }
-    return precision
-    */
     if (number === 0) {
         return 0;
     }
@@ -25,7 +17,7 @@ var getPrecision = function (number) {
     }
     var precision = 0;
     while (number % 10 === 0) {
-        console.log(number % 1);
+        //console.log(number % 1)
         number /= 10;
         precision++;
     }
@@ -43,11 +35,9 @@ var minMaxLog = function (numbers, step) {
     var maxValue = -Infinity;
     var minLog = Infinity;
     var currentLog = undefined;
+    minValue = Math.min.apply(Math, numbers);
     for (var _i = 0, numbers_1 = numbers; _i < numbers_1.length; _i++) {
         var number = numbers_1[_i];
-        if (number < minValue) {
-            minValue = number;
-        }
         if (number > maxValue) {
             maxValue = number;
         }
@@ -55,7 +45,14 @@ var minMaxLog = function (numbers, step) {
             if (number === 0) {
                 continue;
             }
-            currentLog = Math.log(Math.abs(number)) / Math.log(10);
+            //currentLog = Math.log(Math.abs(number- minValue))/Math.log(10)
+            if (number === minValue) {
+                continue;
+            }
+            currentLog = (0, exports.getPrecision)(number - minValue);
+            console.log("currentLog", currentLog, number, minValue);
+            //if (currentLog < minLog) {
+            //if (currentLog > minLog) {
             if (currentLog < minLog) {
                 minLog = currentLog;
             }
@@ -78,6 +75,9 @@ var getValueFromStorageIndex = function (index, min, step) {
 exports.getValueFromStorageIndex = getValueFromStorageIndex;
 var getStepArray = function (numbers, step) {
     console.log(1);
+    if (numbers.length === 0) {
+        return [];
+    }
     if (typeof (step) !== "undefined") {
         if (step <= 0) {
             throw new Error("Step cannot be less than or equal to zero");
@@ -109,7 +109,7 @@ var getStepArray = function (numbers, step) {
         else {
             sortedIndexes[(0, exports.getStorageIndex)(number, minValue, step)] += 1;
         }
-        console.log(sortedIndexes);
+        //console.log(sortedIndexes)
     }
     /*
     for (let number of numbers) {
@@ -149,6 +149,6 @@ var stepSort = function (numbers, step) {
             sortedIndexes[(0, exports.getStorageIndex)(number, minValue, step)] += 1;
         }
     }
-    console.log(sortedIndexes);
+    //console.log(sortedIndexes)
 };
 //export default stepSort;

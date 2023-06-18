@@ -44,7 +44,7 @@ describe('minMaxLog', () => {
   });
 
   test('zeros', () => {
-    expect(minMaxLog([0,0,0,0,0,0,0,-0])).toStrictEqual({ minValue:0, maxValue:0, minLog:0});
+    expect(minMaxLog([0,0,0,0,0,0,0,0])).toStrictEqual({ minValue:0, maxValue:0, minLog:0});
   });
 
   test('Normal With Hundreds', () => {

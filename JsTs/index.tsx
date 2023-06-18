@@ -11,14 +11,6 @@
 
 
 export const getPrecision =(number: number) =>{
-    /*
-    let precision = 0;
-    while(number % 1 !== 0){
-        number *= 10;
-        precision++;
-    }
-    return precision
-    */
 
     if(number === 0 ){return 0}
 
@@ -30,7 +22,7 @@ export const getPrecision =(number: number) =>{
 
 
     while(number % 10 === 0){
-        console.log(number % 1)
+        //console.log(number % 1)
         number /= 10;
         precision++;
     }
@@ -53,19 +45,23 @@ export const minMaxLog = (numbers: number[], step?:number|undefined) => {
     let minLog: number = Infinity
     let currentLog= undefined;
 
+    minValue = Math.min(...numbers)
+
 
 
     for (let number of numbers) {
-        if (number < minValue) {
-            minValue = number
-        }
         if (number > maxValue) {
             maxValue = number
         }
         
         if(!step){
             if(number === 0 ) {continue}
-            currentLog = Math.log(Math.abs(number))/Math.log(10)
+            //currentLog = Math.log(Math.abs(number- minValue))/Math.log(10)
+            if(number === minValue){continue}
+            currentLog = getPrecision(number- minValue)
+            console.log("currentLog", currentLog, number, minValue)
+            //if (currentLog < minLog) {
+            //if (currentLog > minLog) {
             if (currentLog < minLog) {
                 minLog = currentLog
             }
@@ -94,6 +90,7 @@ export const getValueFromStorageIndex = (index: number,min:number,step: number, 
 export const getStepArray = (numbers: number[], step?: number| undefined) => {
     console.log(1)
 
+    if(numbers.length === 0){return []}
     
     if(typeof(step)!=="undefined"){
         if(step<=0){
@@ -139,7 +136,7 @@ export const getStepArray = (numbers: number[], step?: number| undefined) => {
             sortedIndexes[getStorageIndex(number,minValue,step)]+=1
         }
 
-        console.log(sortedIndexes)
+        //console.log(sortedIndexes)
 
     }
 
@@ -194,7 +191,7 @@ const stepSort = (numbers: number[], step?: number| undefined) => {
         }
     }
     
-    console.log(sortedIndexes)
+    //console.log(sortedIndexes)
     
 }
 

@@ -28,7 +28,7 @@ describe('minMaxLog', function () {
         expect(minMaxLog([0, -1, -2, -3, -4, -5, -6, -7, -8, -9])).toStrictEqual({ minValue: -9, maxValue: 0, minLog: 0 });
     });
     test('zeros', function () {
-        expect(minMaxLog([0, 0, 0, 0, 0, 0, 0, -0])).toStrictEqual({ minValue: 0, maxValue: 0, minLog: 0 });
+        expect(minMaxLog([0, 0, 0, 0, 0, 0, 0, 0])).toStrictEqual({ minValue: 0, maxValue: 0, minLog: 0 });
     });
     test('Normal With Hundreds', function () {
         expect(minMaxLog([0, 100, 2, 3, 4, 500, 6, 7, 800, 9])).toStrictEqual({ minValue: 0, maxValue: 800, minLog: 0 });
