@@ -82,11 +82,8 @@ def get_step_array_full(
     if step:
         if step <= 0:
             raise Exception("Step cannot be less than or equal to zero")
-    (minValue, maxValue, minLog) = get_min_max_log(numbers, step, accuracy)
-    if minValue == math.inf:
-        return []  # I don't think that this will happen
-    if not step:
-        step = math.pow(10, get_precision(minValue))
+    (minValue, maxValue, step) = get_min_max_log(numbers, step, accuracy)
+
     # print(minValue, maxValue, minLog)
     # print(step)
     array_length = int(round(1 + ((maxValue - minValue) / step), 10))
@@ -145,15 +142,10 @@ def step_sort(
     if step:
         if step <= 0:
             raise Exception("Step cannot be less than or equal to zero")
-    (minValue, maxValue, minLog) = get_min_max_log(numbers, step, accuracy)
+    (minValue, maxValue, step) = get_min_max_log(numbers, step, accuracy)
 
     # print("minValue", minValue)
     # print("get_precision", get_precision(minValue))
-
-    if not step:
-        step = math.pow(10, minLog)
-    if step == int(step):
-        step = int(step)
 
     step_array = get_step_array(numbers, minValue, maxValue, step)
     sorted_array = get_sorted_array(step_array, minValue, step)

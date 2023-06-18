@@ -56,7 +56,6 @@ class TestGetMinMaxLog(unittest.TestCase):
         self.assertEqual(get_min_max_log([0, 0, 0.1, 0.2, 0.9], 0.1), (0, 0.9, 0.1))
 
 
-"""
 class TestGetStorageIndex(unittest.TestCase):
     def test_get_storage_index(self):
         self.assertEqual(get_storage_index(0, 0, 1), 0)
@@ -110,7 +109,7 @@ class TestStepSort(unittest.TestCase):
         self.assertEqual(step_sort([0.1, -0.1]), [-0.1, 0.1])  # Floats
         self.assertEqual(step_sort([300, 0, 100]), [0, 100, 300])  # Hundreds
         self.assertEqual(step_sort([301, 1, 101]), [1, 101, 301])  # Hundreds With step
-"""
+
 
 if __name__ == "__main__":
     unittest.main()
