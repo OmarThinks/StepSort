@@ -10,6 +10,8 @@
 
 
 
+
+
 export const getPrecision =(number: number) =>{
 
     if(number === 0 ){return 0}
