@@ -4,18 +4,13 @@ Efficient sorting algorithm.
 This sorting algorithm has a Time Complexity of **`O(n)`**, **only if used
 within the limitation** that I will talk about in the end.
 
-# My name:
-
-- In English: Omar Magdy ElSayed Yassin
-- In Arabic: عمر مجدي السيد يس
-
 # How it works:
 
 It works on **`4 Steps`**:
 
 ## Step 1: get (Min Value, Max Value, & Step):
 
-<img src="./Images/Step1.png">
+<img src="./Media/Images/Step1.png">
 
 Iterate over each element of the list to get these three variables:
 
@@ -27,7 +22,7 @@ Iterate over each element of the list to get these three variables:
 
 ## Step 2: Generate Empty “Step Array”:
 
-<img src="./Images/Step2.png">
+<img src="./Media/Images/Step2.png">
 
 Using the:
 
@@ -39,14 +34,14 @@ We can generate the Empty **`Step Array`**
 
 ## Step 3: Fill the “Step Array”:
 
-<img src="./Images/Step3.png">
+<img src="./Media/Images/Step3.png">
 
 Iterate over each element in the Step Array, and increment the value at the
 correct index for that element.
 
 ## Step 4: Unfold the “Step Array”:
 
-<img src="./Images/Step4.png">
+<img src="./Media/Images/Step4.png">
 
 Let's apply on the example above:
 
@@ -61,7 +56,7 @@ Let's apply on the example above:
 
 # The Limitation:
 
-<img src="./Images/Limitation.png">
+<img src="./Media/Images/Limitation.png">
 
 Since an array that can contain every possible element will be created, so it
 souldn't be that the number of posibilities is very large.  
