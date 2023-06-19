@@ -6,8 +6,8 @@ within the limitation** that I will talk about in the end.
 
 # My name:
 
-- Omar Magdy ElSayed Yassin
-- عمر مجدي السيد يس
+- In English: Omar Magdy ElSayed Yassin
+- In Arabic: عمر مجدي السيد يس
 
 # How it works:
 
@@ -96,12 +96,6 @@ computational recources.
 
 - `[0.87654512, 100.54546578, 2.2145468432]`
 
-# Code:
-
-- Code (Python): https://github.com/OmarThinks/StepSort/blob/master/Python/app.py
-- Testing: https://github.com/OmarThinks/StepSort/blob/master/Python/test_app.py
-- I also tried coding using JS and TS, but I stopped midway
-
 ## Custom Types:
 
 - **`Number`**:
@@ -160,3 +154,13 @@ def step_sort(
   - Examples:
     - `5`
     - `3`
+
+# Source Code:
+
+- Code (Python): https://github.com/OmarThinks/StepSort/blob/master/Python/app.py
+- Testing: https://github.com/OmarThinks/StepSort/blob/master/Python/test_app.py
+- I also tried coding using JS and TS, but I stopped midway
+
+# AI Generative tools used:
+
+I used AWS Code Whisperer to assist me while writing the code.
