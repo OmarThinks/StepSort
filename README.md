@@ -4,6 +4,10 @@ Efficient sorting algorithm.
 This sorting algorithm has a Time Complexity of **`O(n)`**, **only if used
 within the limitation** that I will talk about in the end.
 
+# Youtube:
+
+https://www.youtube.com/watch?v=EfxPlNteoRo
+
 # How it works:
 
 It works on **`4 Steps`**:
